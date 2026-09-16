@@ -17,9 +17,9 @@ The system empowers:
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-### 🎓 1. Student Module
+### 1. Student Module
 - **User Authentication & Profile:** Secure registration, login, and academic profile maintenance (skills, resume, grade details).
 - **Internship Search & Discovery:** Search and filter internships by title, company, location, and role type.
 - **Application Workflow:** One-click internship application with duplicate application prevention and real-time status tracking (Submitted, Shortlisted, Rejected).
@@ -53,7 +53,7 @@ The system empowers:
 
 ---
 
-## 📋 System Requirements Summary
+## System Requirements Summary
 
 ### Functional Requirements (18 Total)
 - **Authentication:** `IPR-F-001` (Student Reg), `IPR-F-002` (Login), `IPR-F-003` (RBAC)
@@ -73,7 +73,7 @@ The system empowers:
 
 ---
 
-## 📐 System Models & Design
+## System Models & Design
 
 The project specification includes complete UML Use-Case Diagrams, Class Diagrams, Sequence Diagrams, and Activity Diagrams detailing:
 1. **Student Module Use Case & Domain Model**
@@ -84,7 +84,7 @@ The project specification includes complete UML Use-Case Diagrams, Class Diagram
 
 ---
 
-## 👥 Project Team & Contributions
+## Project Team & Contributions
 
 | S. No. | Student Name | SRN | Contribution |
 | :---: | :--- | :--- | :--- |
@@ -95,7 +95,7 @@ The project specification includes complete UML Use-Case Diagrams, Class Diagram
 
 ---
 
-## 📄 Repository Files
+##  Repository Files
 
 - [`README.md`](./README.md) - Project overview, features, tech stack, and documentation.
 - [`SRS.pdf`](./SRS.pdf) - Complete Software Requirements Specification document.
