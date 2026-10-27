@@ -2,103 +2,94 @@
 
 > **Department of CSE, PES University**  
 > **Course:** UE24CS341A - Software Engineering (5th Semester, AY 2026-27)  
-> **Document:** Software Requirements Specification (SRS) v1.0  
+> **Sprint-1 Period:** 19th October to 23rd October 2026  
+> **Repository:** [online-internship-placement](https://github.com/Online-Internship-Placement-Portal/online-internship-placement)  
 
 ---
 
-## 📌 Project Overview
+## 📌 Sprint-1 Working Product Overview
 
 The **Online Internship & Placement Preparation Portal** is an integrated web-based platform built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js). It bridges the gap between students preparing for placement drives and recruiters seeking prospective interns.
 
-The system empowers:
-- **Students** to discover internship opportunities, track application statuses, attempt aptitude tests, and monitor their preparation progress with real-time analytics.
-- **Recruiters** to post internship listings, evaluate candidate profiles, and manage shortlisting/rejection workflows.
-- **Administrators** to oversee user accounts, manage tests/questions, and monitor system performance.
+This repository contains the complete deliverables for **Sprint-1**, including:
+1. **Automated CI/CD Workflow with GitHub Actions** (`.github/workflows/ci.yml`)
+2. **Four Dedicated Team Member Workspaces** for independent branches and pull requests
+3. **Comprehensive Software Requirements & Test Coverage** mapping directly to the submitted **SRS v1.0**, **SAD v1.0**, and **STP v1.0**
+4. **Working End-to-End Product** ready for live demonstration and the 1-minute outcome video
 
 ---
 
-## Key Features
+## 👥 Team Members & Sprint-1 Roles
 
-### 1. Student Module
-- **User Authentication & Profile:** Secure registration, login, and academic profile maintenance (skills, resume, grade details).
-- **Internship Search & Discovery:** Search and filter internships by title, company, location, and role type.
-- **Application Workflow:** One-click internship application with duplicate application prevention and real-time status tracking (Submitted, Shortlisted, Rejected).
-- **Aptitude Test Engine:** Interactive online test engine with automated scoring and immediate test result calculation.
-- **Preparation Analytics:** Graphical tracking of placement preparation progress, score history, and performance analytics.
-
-### 🏢 2. Recruiter Module
-- **Listing Management:** Create, update, edit, and close internship postings.
-- **Candidate Evaluation:** View applicant profiles, review resumes, and change application statuses (Shortlist / Reject).
-
-### ⚙️ 3. Admin Module
-- **User & Content Governance:** Manage student and recruiter accounts.
-- **Test Repository Management:** Create and maintain aptitude test modules and question banks.
-- **System Analytics:** Access overall platform metrics and system usage logs.
+| S. No. | Student Name | SRN | Assigned Module / Role | Directory |
+| :---: | :--- | :--- | :--- | :--- |
+| 1 | **Sohel Mahibubasa Chapparband** | `PES2UG25CS826` | **Authentication and Integration** | [`Sprint-1/sohel/`](./Sprint-1/sohel/) |
+| 2 | **Navya R** | `PES2UG24CS308` | **User Interface (Frontend)** | [`Sprint-1/navya/`](./Sprint-1/navya/) |
+| 3 | **Nikhil Raj G** | `PES2UG24CS319` | **Backend Setup** | [`Sprint-1/nikhil_raj/`](./Sprint-1/nikhil_raj/) |
+| 4 | **Patnaikuni Sai Dheeraj** | `PES2UG24CS341` | **Database Setup** | [`Sprint-1/dheeraj/`](./Sprint-1/dheeraj/) |
 
 ---
 
-## 🛠️ Technology Stack & Architecture
+## 🚀 Quick Start: Running the Working Product
 
-### Tech Stack
-| Component | Technology |
-| :--- | :--- |
-| **Frontend** | React.js, HTML5, CSS3, JavaScript (ES6+) |
-| **Backend** | Node.js, Express.js |
-| **Database** | MongoDB |
-| **API Architecture** | RESTful APIs (JSON over HTTP/HTTPS) |
-| **IDE / Version Control** | Visual Studio Code, Git & GitHub |
+### 1. Clone & Install Dependencies
+```bash
+git clone https://github.com/Online-Internship-Placement-Portal/online-internship-placement.git
+cd online-internship-placement
+npm install
+```
 
-### System Architecture Flow
+### 2. Run the Automated Test Suite (100% Pass Rate)
+```bash
+npm test
+```
 
-
----
-
-## System Requirements Summary
-
-### Functional Requirements (18 Total)
-- **Authentication:** `IPR-F-001` (Student Reg), `IPR-F-002` (Login), `IPR-F-003` (RBAC)
-- **Profile:** `IPR-F-004` (Profile Update), `IPR-F-005` (Academic & Resume Management)
-- **Internships:** `IPR-F-006` (Display Listings), `IPR-F-007` (Search/Filter), `IPR-F-008` (Apply), `IPR-F-009` (Prevent Duplicates), `IPR-F-010` (Track Status)
-- **Aptitude Tests:** `IPR-F-011` (Take Tests), `IPR-F-012` (Auto Evaluation), `IPR-F-013` (Store Test History)
-- **Progress & Analytics:** `IPR-F-014` (Record Progress), `IPR-F-015` (Performance Analytics)
-- **Recruiter:** `IPR-F-016` (Manage Listings), `IPR-F-017` (Candidate Status Updates)
-- **Admin:** `IPR-F-018` (System & Question Management)
-
-### Non-Functional Requirements & Security (13 Total)
-- **Performance:** Main dashboard loads within 3s (`IPR-NF-001`)
-- **Reliability:** 99% availability (`IPR-NF-002`)
-- **Scalability:** Supports 500 concurrent users (`IPR-NF-003`)
-- **Usability:** Responsive across desktop, tablet, and mobile (`IPR-NF-004`)
-- **Security:** Password hashing (`IPR-SR-002`), Input validation & sanitization (`IPR-NF-005`, `IPR-SR-005`), HTTPS/TLS communication (`IPR-SR-004`)
+### 3. Launch the Integrated Application
+```bash
+npm start
+```
+Open **`http://localhost:5000`** in any web browser to interact with the working system!
 
 ---
 
-## System Models & Design
+## 🎬 1-Minute Working Product Video Demo
 
-The project specification includes complete UML Use-Case Diagrams, Class Diagrams, Sequence Diagrams, and Activity Diagrams detailing:
-1. **Student Module Use Case & Domain Model**
-2. **Recruiter & Admin Module Use Case Model**
-3. **Sequence Diagram for User Management**
-4. **Activity Diagram for Internship Management**
-5. **Requirements Traceability Matrix (RTM)** mapping all requirements to test cases `TC-AUTH-*`, `TC-INT-*`, `TC-TEST-*`, `TC-REC-*`, and `TC-ADMIN-*`.
-
----
-
-## Project Team & Contributions
-
-| S. No. | Student Name | SRN | Contribution |
-| :---: | :--- | :--- | :--- |
-| 1 | **Nikhil Raj G** | PES2UG24CS319 | Introduction & Overall Description |
-| 2 | **NAVYA** | PES2UG24CS308 | External Interface Requirements & System Features |
-| 3 | **Patnaikuni Sai Dheeraj** | PES2UG24CS341 | Non-Functional Requirements, Quality Attributes & Acceptance Tests |
-| 4 | **Sohel M Chapparband** | PES2UG25CS826 | UML Use-Case Diagrams & Requirements Traceability Matrix (RTM) |
+- **Demonstration Guide & Script:** Refer to [`Sprint-1/VIDEO_DEMO_GUIDE.md`](./Sprint-1/VIDEO_DEMO_GUIDE.md) for a second-by-second walkthrough.
+- **Pre-seeded Demo Accounts:**
+  - **Student:** `sohel@pes.edu` / `Password123`
+  - **Recruiter:** `recruiter@google.com` / `RecruiterPass123`
+  - **Administrator:** `admin@pes.edu` / `AdminPass123`
 
 ---
 
-##  Repository Files
+## 📁 Repository Structure
 
-- [`README.md`](./README.md) - Project overview, features, tech stack, and documentation.
-- [`SRS.pdf`](./SRS.pdf) - Complete Software Requirements Specification document.
+```
+online-internship-placement/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                 # Automated testing & PR verification pipeline
+│       └── pr-automation.yml       # PR title and compliance checker
+├── Sprint-1/
+│   ├── README.md                  # Sprint-1 summary and module launch instructions
+│   ├── Sprint-1-Deviations-and-Summary.md # Deviations & traceability matrix report
+│   ├── VIDEO_DEMO_GUIDE.md        # 1-minute video demo script and recording instructions
+│   ├── sohel/                     # Sohel: JWT Auth, RBAC, Security Sanitization & E2E Tests
+│   ├── navya/                     # Navya: React UI, Dashboards & Responsive Design
+│   ├── nikhil_raj/                # Nikhil Raj: Express REST APIs, Route Handlers & Logger
+│   └── dheeraj/                   # Dheeraj: MongoDB Connection, Mongoose Schemas & Seeder
+├── public/
+│   └── index.html                 # Integrated Single-Page Working Application
+├── server.js                      # Unified Server Entrypoint (Sprint-1)
+├── package.json                   # Root package definitions and scripts
+└── README.md                      # Project master readme
+```
 
 ---
-*Submitted for Review - Department of CSE, PES University*
+
+## 📑 Traceability & Documentation
+- **Requirements Traceability Matrix:** See Section 2 of [`Sprint-1-Deviations-and-Summary.md`](./Sprint-1/Sprint-1-Deviations-and-Summary.md).
+- **Test Results & Metrics:** Executed via `node Sprint-1/sohel/integration/testRunner.js`.
+
+---
+*Department of Computer Science & Engineering, PES University*
