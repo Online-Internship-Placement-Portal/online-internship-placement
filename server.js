@@ -61,12 +61,27 @@ app.get('*', (req, res) => {
 // Centralized error handler
 app.use(errorHandler);
 
-const server = app.listen(PORT, () => {
-  console.log('================================================================');
-  console.log('  ONLINE INTERNSHIP & PLACEMENT PREPARATION PORTAL (SPRINT-1)');
-  console.log(`  Working Product URL: http://localhost:${PORT}`);
-  console.log(`  Health Check:        http://localhost:${PORT}/api/health`);
-  console.log('================================================================');
-});
+const listenOnPort = (portToTry) => {
+  const srv = app.listen(portToTry, () => {
+    console.log('================================================================');
+    console.log('  ONLINE INTERNSHIP & PLACEMENT PREPARATION PORTAL (SPRINT-1)');
+    console.log(`  Working Product URL: http://localhost:${portToTry}`);
+    console.log(`  Health Check:        http://localhost:${portToTry}/api/health`);
+    console.log('================================================================');
+  });
+
+  srv.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.warn(`[Port ${portToTry} is already in use, trying http://localhost:${portToTry + 1}...]`);
+      listenOnPort(portToTry + 1);
+    } else {
+      console.error(err);
+    }
+  });
+
+  return srv;
+};
+
+const server = listenOnPort(PORT);
 
 module.exports = server;
