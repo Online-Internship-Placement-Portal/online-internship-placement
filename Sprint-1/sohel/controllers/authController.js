@@ -12,6 +12,44 @@ const { JWT_SECRET } = require('../middleware/authMiddleware');
 // In-memory fallback store if MongoDB is not connected during isolated unit testing
 const inMemoryUsers = new Map();
 
+// Pre-populate standard demo accounts (STP Section 6)
+const studentHash = bcrypt.hashSync('Password123', 10);
+const recruiterHash = bcrypt.hashSync('RecruiterPass123', 10);
+const adminHash = bcrypt.hashSync('AdminPass123', 10);
+
+inMemoryUsers.set('sohel@pes.edu', {
+  id: 'usr_student_01',
+  _id: 'usr_student_01',
+  name: 'Sohel Mahibubasa Chapparband',
+  email: 'sohel@pes.edu',
+  password: studentHash,
+  role: 'student',
+  department: 'Computer Science and Engineering',
+  phone: '+91-9876543210'
+});
+
+inMemoryUsers.set('recruiter@google.com', {
+  id: 'usr_recruiter_01',
+  _id: 'usr_recruiter_01',
+  name: 'Google Campus Recruiter',
+  email: 'recruiter@google.com',
+  password: recruiterHash,
+  role: 'recruiter',
+  department: 'Talent Acquisition',
+  phone: '+91-9876543212'
+});
+
+inMemoryUsers.set('admin@pes.edu', {
+  id: 'usr_admin_01',
+  _id: 'usr_admin_01',
+  name: 'Placement Admin PES',
+  email: 'admin@pes.edu',
+  password: adminHash,
+  role: 'admin',
+  department: 'Placement Cell',
+  phone: '+91-9876543213'
+});
+
 /**
  * Helper to get User model (if mongoose is available) or use in-memory store
  */
