@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "name": "Sohel Chapparband",
+      "email": "sohel@pes.edu",
+      "password": "Password123",
+      "role": "student",
+      "department": "Computer Science and Engineering",
+      "phone": "+91-9876543210"
+    },
+    {
+      "name": "Navya R",
+      "email": "navya@pes.edu",
+      "password": "Password123",
+      "role": "student",
+      "department": "Computer Science and Engineering",
+      "phone": "+91-9876543211"
+    },
+    {
+      "name": "Google Campus Recruiter",
+      "email": "recruiter@google.com",
+      "password": "RecruiterPass123",
+      "role": "recruiter",
+      "department": "Talent Acquisition",
+      "phone": "+91-9876543212"
+    },
+    {
+      "name": "Placement Admin PES",
+      "email": "admin@pes.edu",
+      "password": "AdminPass123",
+      "role": "admin",
+      "department": "Placement Cell",
+      "phone": "+91-9876543213"
+    }
+  ],
+  "internships": [
+    {
+      "title": "Software Development Engineer Intern",
+      "company": "Google",
+      "description": "Join Google's engineering team for summer 2027. Work on large-scale distributed systems, web architectures, and algorithms.",
+      "location": "Bengaluru, India",
+      "type": "Full-time",
+      "stipend": "₹1,20,000 / month",
+      "requirements": ["Data Structures", "Algorithms", "Java / C++ / Python", "System Design Basics"],
+      "deadline": "2027-01-15T00:00:00.000Z",
+      "status": "Open"
+    },
+    {
+      "title": "Full Stack Web Developer Intern",
+      "company": "Microsoft",
+      "description": "Design and build cloud-native applications with React, Node.js, and Azure. Collaborate with global product teams.",
+      "location": "Hyderabad, India",
+      "type": "Full-time",
+      "stipend": "₹95,000 / month",
+      "requirements": ["React.js", "Node.js", "REST APIs", "Cloud Fundamentals"],
+      "deadline": "2027-02-01T00:00:00.000Z",
+      "status": "Open"
+    },
+    {
+      "title": "Cloud & DevOps Intern",
+      "company": "Amazon AWS",
+      "description": "Develop automated infrastructure pipelines, CI/CD workflows, containerization, and backend services.",
+      "location": "Bengaluru, India",
+      "type": "Remote",
+      "stipend": "₹85,000 / month",
+      "requirements": ["Linux", "Docker", "Git / GitHub Actions", "Scripting"],
+      "deadline": "2027-02-28T00:00:00.000Z",
+      "status": "Open"
+    }
+  ],
+  "aptitudeTests": [
+    {
+      "title": "Placement Aptitude Assessment 2026",
+      "category": "Quantitative Aptitude",
+      "durationMinutes": 20,
+      "totalMarks": 3,
+      "questions": [
+        {
+          "questionText": "A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?",
+          "options": {
+            "A": "120 metres",
+            "B": "150 metres",
+            "C": "180 metres",
+            "D": "324 metres"
+          },
+          "correctOption": "B",
+          "marks": 1
+        },
+        {
+          "questionText": "What is the worst-case time complexity of QuickSort?",
+          "options": {
+            "A": "O(n log n)",
+            "B": "O(n)",
+            "C": "O(n^2)",
+            "D": "O(log n)"
+          },
+          "correctOption": "C",
+          "marks": 1
+        },
+        {
+          "questionText": "Which HTTP method is idempotent according to REST conventions?",
+          "options": {
+            "A": "POST",
+            "B": "PUT",
+            "C": "PATCH",
+            "D": "CONNECT"
+          },
+          "correctOption": "B",
+          "marks": 1
+        }
+      ]
+    }
+  ]
+}
