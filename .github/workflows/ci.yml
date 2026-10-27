@@ -1,0 +1,54 @@
+name: Sprint-1 CI Pipeline & PR Automation
+
+on:
+  push:
+    branches: [ main, master, 'feature/**', 'sprint-1/**' ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-and-verify:
+    name: Automated Testing & Verification
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18.x, 20.x ]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies (Sohel Auth & Integration)
+        run: |
+          cd Sprint-1/sohel
+          npm install
+
+      - name: Run Sprint-1 Automated Verification Test Suite (STP Section 13.1 & 14)
+        run: |
+          cd Sprint-1/sohel
+          node integration/testRunner.js
+
+  pr-compliance:
+    name: PR Compliance & Verification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify Sprint-1 File Structure
+        run: |
+          echo "Verifying Sprint-1 Deliverables..."
+          test -d "Sprint-1/sohel" && echo "Found Sprint-1/sohel" || true
+          test -d "Sprint-1/navya" && echo "Found Sprint-1/navya" || true
+          test -d "Sprint-1/nikhil_raj" && echo "Found Sprint-1/nikhil_raj" || true
+          test -d "Sprint-1/dheeraj" && echo "Found Sprint-1/dheeraj" || true
+          test -f "Sprint-1/README.md" || (echo "Missing Sprint-1/README.md" && exit 1)
+          echo "Sprint-1 PR deliverables structure verified successfully."
