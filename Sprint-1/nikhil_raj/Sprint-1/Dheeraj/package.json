@@ -1,0 +1,16 @@
+{
+  "name": "portal-database-setup",
+  "version": "1.0.0",
+  "description": "Sprint 1 Database Setup & Mongoose Schemas - Online Internship & Placement Preparation Portal",
+  "author": "Patnaikuni Sai Dheeraj (PES2UG24CS341)",
+  "license": "ISC",
+  "main": "config/db.js",
+  "scripts": {
+    "seed": "node seed/seed.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.3.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5"
+  }
+}
