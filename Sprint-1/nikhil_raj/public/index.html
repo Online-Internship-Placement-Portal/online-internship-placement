@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Internship & Placement Preparation Portal (Sprint 1)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --secondary: #475569;
+      --success: #16a34a;
+      --warning: #ca8a04;
+      --danger: #dc2626;
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 8px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+    .navbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--primary); color: #ffffff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: #f1f5f9; color: var(--text-main); border-color: var(--border); }
+    .btn-secondary:hover { background: #e2e8f0; }
+    .btn-success { background: var(--success); color: #ffffff; }
+    .btn-danger { background: var(--danger); color: #ffffff; }
+    .btn.active { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      min-height: 80vh;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .card-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-num { font-size: 2rem; font-weight: 700; color: var(--primary); }
+    .stat-label { font-size: 0.875rem; color: var(--text-muted); }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.35rem; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .alert {
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      font-size: 0.925rem;
+    }
+    .alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .alert-success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.925rem;
+    }
+    .data-table th, .data-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table th { background: #f8fafc; color: var(--secondary); font-weight: 600; }
+
+    .role-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 9999px;
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+    .badge-submitted { background: #dbeafe; color: #1e40af; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600; font-size: 0.75rem; }
+    .badge-shortlisted { background: #dcfce7; color: #15803d; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600; font-size: 0.75rem; }
+    .badge-rejected { background: #fee2e2; color: #b91c1c; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600; font-size: 0.75rem; }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background-color: #e2e8f0;
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" onclick="navigate('dashboard')" class="brand-logo">🎓 PES Placement Portal</a>
+      <div id="nav-actions" class="nav-links"></div>
+    </div>
+  </nav>
+
+  <main class="main-content" id="app-root">
+    <!-- Dynamic views injected here -->
+  </main>
+
+  <footer>
+    Online Internship & Placement Preparation Portal • Department of CSE, PES University (Sprint-1)
+  </footer>
+
+  <script>
+    // State
+    let currentUser = null;
+    let token = null;
+    let currentTab = 'login';
+
+    // Initialize from localStorage
+    try {
+      const savedToken = localStorage.getItem('portal_token');
+      const savedUser = localStorage.getItem('portal_user');
+      if (savedToken && savedUser) {
+        token = savedToken;
+        currentUser = JSON.parse(savedUser);
+        currentTab = 'dashboard';
+      }
+    } catch (e) {}
+
+    function saveSession(user, jwtToken) {
+      currentUser = user;
+      token = jwtToken;
+      localStorage.setItem('portal_token', jwtToken);
+      localStorage.setItem('portal_user', JSON.stringify(user));
+      currentTab = 'dashboard';
+      render();
+    }
+
+    function logout() {
+      currentUser = null;
+      token = null;
+      localStorage.clear();
+      currentTab = 'login';
+      render();
+    }
+
+    function navigate(tab) {
+      currentTab = tab;
+      render();
+    }
+
+    function renderNav() {
+      const navContainer = document.getElementById('nav-actions');
+      if (!currentUser) {
+        navContainer.innerHTML = `
+          <button class="btn ${currentTab === 'login' ? 'btn-primary' : 'btn-secondary'}" onclick="navigate('login')">Sign In</button>
+          <button class="btn ${currentTab === 'register' ? 'btn-primary' : 'btn-secondary'}" onclick="navigate('register')">Register (Student)</button>
+        `;
+        return;
+      }
+
+      let links = `
+        <button class="btn btn-secondary ${currentTab === 'dashboard' ? 'active' : ''}" onclick="navigate('dashboard')">Dashboard</button>
+      `;
+
+      if (currentUser.role === 'student') {
+        links += `
+          <button class="btn btn-secondary ${currentTab === 'internships' ? 'active' : ''}" onclick="navigate('internships')">Browse Internships</button>
+          <button class="btn btn-secondary ${currentTab === 'tests' ? 'active' : ''}" onclick="navigate('tests')">Aptitude Tests</button>
+        `;
+      }
+
+      links += `
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-left:0.5rem;">
+          <span style="font-weight:600; font-size:0.9rem;">${currentUser.name}</span>
+          <span class="role-pill">${currentUser.role}</span>
+          <button class="btn btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.8rem;" onclick="logout()">Logout</button>
+        </div>
+      `;
+      navContainer.innerHTML = links;
+    }
+
+    async function render() {
+      renderNav();
+      const root = document.getElementById('app-root');
+
+      if (!currentUser) {
+        if (currentTab === 'register') {
+          root.innerHTML = renderRegister();
+          attachRegisterHandler();
+        } else {
+          root.innerHTML = renderLogin();
+          attachLoginHandler();
+        }
+        return;
+      }
+
+      if (currentTab === 'internships') {
+        root.innerHTML = `<div class="card"><h3>Loading internships...</h3></div>`;
+        await renderInternships();
+        return;
+      }
+
+      if (currentTab === 'tests') {
+        await renderTests();
+        return;
+      }
+
+      // Dashboards based on role (IPR-F-003)
+      if (currentUser.role === 'recruiter') {
+        await renderRecruiterDashboard();
+      } else if (currentUser.role === 'admin') {
+        await renderAdminDashboard();
+      } else {
+        await renderStudentDashboard();
+      }
+    }
+
+    function renderLogin() {
+      return `
+        <div style="max-width: 440px; margin: 3rem auto;">
+          <div class="card">
+            <div style="text-align: center; margin-bottom: 1.25rem;">
+              <h2 class="card-title">Sign In to Portal</h2>
+              <p style="color: var(--text-muted); font-size: 0.875rem;">PES University Placement & Internship Platform</p>
+            </div>
+            <div id="login-alert"></div>
+            <form id="login-form">
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="login-email" class="form-input" required placeholder="e.g. sohel@pes.edu">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+              <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">QUICK DEMO ACCOUNTS (STP Section 6):</div>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" onclick="quickFill('sohel@pes.edu', 'Password123')">Student (Sohel)</button>
+                <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" onclick="quickFill('recruiter@google.com', 'RecruiterPass123')">Recruiter (Google)</button>
+                <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.5rem;" onclick="quickFill('admin@pes.edu', 'AdminPass123')">Admin (PES)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function quickFill(email, pass) {
+      document.getElementById('login-email').value = email;
+      document.getElementById('login-password').value = pass;
+    }
+
+    function attachLoginHandler() {
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const alertEl = document.getElementById('login-alert');
+        alertEl.innerHTML = '';
+
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) {
+            throw new Error(data.message || 'Login failed.');
+          }
+          saveSession(data.user, data.token);
+        } catch (err) {
+          alertEl.innerHTML = `<div class="alert alert-error">${err.message}</div>`;
+        }
+      });
+    }
+
+    function renderRegister() {
+      return `
+        <div style="max-width: 480px; margin: 2.5rem auto;">
+          <div class="card">
+            <div style="text-align: center; margin-bottom: 1.25rem;">
+              <h2 class="card-title">Student Registration</h2>
+              <p style="color: var(--text-muted); font-size: 0.875rem;">Create account for internship applications & placement tests</p>
+            </div>
+            <div id="reg-alert"></div>
+            <form id="reg-form">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="reg-name" class="form-input" required placeholder="e.g. Sohel Mahibubasa Chapparband">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="reg-email" class="form-input" required placeholder="e.g. sohel@pes.edu">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Department</label>
+                <select id="reg-dept" class="form-select">
+                  <option value="Computer Science and Engineering">Computer Science & Engineering</option>
+                  <option value="Information Science and Engineering">Information Science & Engineering</option>
+                  <option value="Electronics and Communication">Electronics & Communication</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="reg-pass" class="form-input" required minlength="6" placeholder="Create strong password">
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Create Student Account</button>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function attachRegisterHandler() {
+      document.getElementById('reg-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const alertEl = document.getElementById('reg-alert');
+        alertEl.innerHTML = '';
+        const body = {
+          name: document.getElementById('reg-name').value,
+          email: document.getElementById('reg-email').value,
+          department: document.getElementById('reg-dept').value,
+          password: document.getElementById('reg-pass').value,
+          role: 'student'
+        };
+        try {
+          const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) throw new Error(data.message || 'Registration failed');
+          saveSession(data.user, data.token);
+        } catch (err) {
+          alertEl.innerHTML = `<div class="alert alert-error">${err.message}</div>`;
+        }
+      });
+    }
+
+    async function renderStudentDashboard() {
+      const root = document.getElementById('app-root');
+      let prog = { analytics: { overallPercentage: 65, averageScore: 85, readinessStatus: 'In Progress' }, topics: [] };
+      let apps = [];
+
+      try {
+        const [progRes, appsRes] = await Promise.all([
+          fetch('/api/progress/me', { headers: { Authorization: `Bearer ${token}` } }),
+          fetch('/api/applications/me', { headers: { Authorization: `Bearer ${token}` } })
+        ]);
+        const progData = await progRes.json();
+        const appsData = await appsRes.json();
+        if (progData.success) prog = progData.data;
+        if (appsData.success) apps = appsData.data;
+      } catch (e) {}
+
+      root.innerHTML = `
+        <div class="card" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: #ffffff;">
+          <h1 style="font-size: 1.75rem; font-weight: 700;">Welcome, ${currentUser.name}! 👋</h1>
+          <p style="opacity: 0.9; margin-top: 0.25rem;">Department: ${currentUser.department || 'CSE'} • Student Placement Portal</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="stat-box">
+            <span class="stat-num">${apps.length}</span>
+            <span class="stat-label">Active Applications</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">${prog.analytics.overallPercentage}%</span>
+            <span class="stat-label">Placement Preparation Completed</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">${prog.analytics.averageScore}/100</span>
+            <span class="stat-label">Average Practice Assessment Score</span>
+          </div>
+        </div>
+
+        <!-- Preparation Analytics (IPR-F-014, IPR-F-015) -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <div>
+              <h2 class="card-title">Placement Preparation Progress</h2>
+              <p style="color:var(--text-muted); font-size:0.875rem;">Status: <strong style="color:var(--primary);">${prog.analytics.readinessStatus}</strong></p>
+            </div>
+            <button class="btn btn-secondary" onclick="navigate('tests')">Take Assessment</button>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: ${prog.analytics.overallPercentage}%;"></div>
+          </div>
+          <table class="data-table" style="margin-top:1rem;">
+            <thead>
+              <tr><th>Preparation Module</th><th>Category</th><th>Status</th><th>Score</th></tr>
+            </thead>
+            <tbody>
+              ${prog.topics.map(t => `
+                <tr>
+                  <td><strong>${t.topic}</strong></td>
+                  <td>${t.category}</td>
+                  <td><span class="${t.completed ? 'badge-shortlisted' : 'badge-submitted'}">${t.completed ? 'Completed' : 'In Progress'}</span></td>
+                  <td>${t.score}%</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Application Tracker (IPR-F-010) -->
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <div>
+              <h2 class="card-title">My Internship Applications</h2>
+              <p style="color:var(--text-muted); font-size:0.875rem;">Track real-time status of applied positions</p>
+            </div>
+            <button class="btn btn-primary" onclick="navigate('internships')">Search More Internships</button>
+          </div>
+          ${apps.length === 0 ? `<p style="color:var(--text-muted); text-align:center; padding:1.5rem;">No applications submitted yet.</p>` : `
+            <table class="data-table">
+              <thead>
+                <tr><th>Company</th><th>Role</th><th>Location</th><th>Applied Date</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                ${apps.map(a => `
+                  <tr>
+                    <td><strong>${a.internship?.company || 'Company'}</strong></td>
+                    <td>${a.internship?.title || 'Internship Role'}</td>
+                    <td>${a.internship?.location || 'Bengaluru'}</td>
+                    <td>${new Date(a.appliedDate || Date.now()).toLocaleDateString()}</td>
+                    <td><span class="${a.status === 'Shortlisted' ? 'badge-shortlisted' : a.status === 'Rejected' ? 'badge-rejected' : 'badge-submitted'}">${a.status}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          `}
+        </div>
+      `;
+    }
+
+    async function renderInternships() {
+      const root = document.getElementById('app-root');
+      let internships = [];
+      try {
+        const res = await fetch('/api/internships');
+        const data = await res.json();
+        if (data.success) internships = data.data;
+      } catch (e) {}
+
+      root.innerHTML = `
+        <div class="card">
+          <h1 class="card-title">Internship Opportunities</h1>
+          <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.25rem;">
+            Discover available corporate internships, search and filter by role and apply directly.
+          </p>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <input type="text" id="int-search" class="form-input" style="flex:1; min-width:200px;" placeholder="Search internships...">
+            <button class="btn btn-primary" onclick="filterInternships()">Filter</button>
+          </div>
+        </div>
+        <div id="internship-alert"></div>
+        <div id="internships-list" style="display:grid; gap:1rem;">
+          ${internships.map(i => renderInternshipCard(i)).join('')}
+        </div>
+      `;
+    }
+
+    function renderInternshipCard(i) {
+      const id = i.id || i._id;
+      return `
+        <div class="card" style="margin:0;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap;">
+            <div>
+              <h3 style="font-size:1.15rem; font-weight:600;">${i.title}</h3>
+              <div style="color:var(--primary); font-weight:600; margin-top:0.2rem;">🏢 ${i.company}</div>
+            </div>
+            <span class="role-pill" style="background:#ecfdf5; color:#065f46;">${i.type}</span>
+          </div>
+          <p style="color:#475569; font-size:0.925rem; margin:0.75rem 0;">${i.description}</p>
+          <div style="display:flex; gap:1.5rem; font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; flex-wrap:wrap;">
+            <span>📍 ${i.location}</span>
+            <span>💰 ${i.stipend}</span>
+            <span>📅 Deadline: ${new Date(i.deadline).toLocaleDateString()}</span>
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button class="btn btn-primary" onclick="applyInternship('${id}', '${i.company}', '${i.title}')">Apply for Internship</button>
+          </div>
+        </div>
+      `;
+    }
+
+    async function applyInternship(id, company, title) {
+      const alertEl = document.getElementById('internship-alert');
+      try {
+        const res = await fetch(`/api/internships/${id}/applications`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ resume: 'https://storage.portal.pes.edu/resumes/default.pdf' })
+        });
+        const data = await res.json();
+        if (res.status === 409) {
+          // DUPLICATE APPLICATION DETECTED (IPR-F-009 / TC-Int-04)
+          alertEl.innerHTML = `<div class="alert alert-error">⚠️ Duplicate Application Prevented: You have already applied for ${company} (${title}).</div>`;
+        } else if (!res.ok || !data.success) {
+          throw new Error(data.message || 'Application failed');
+        } else {
+          // SUCCESSFUL (IPR-F-008 / TC-Int-03)
+          alertEl.innerHTML = `<div class="alert alert-success">🎉 Success! Application submitted for ${company} (${title}). Status: Submitted.</div>`;
+        }
+      } catch (err) {
+        alertEl.innerHTML = `<div class="alert alert-error">${err.message}</div>`;
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function renderTests() {
+      const root = document.getElementById('app-root');
+      let tests = [];
+      try {
+        const res = await fetch('/api/tests', { headers: { Authorization: `Bearer ${token}` } });
+        const data = await res.json();
+        if (data.success) tests = data.data;
+      } catch (e) {}
+
+      if (tests.length === 0) {
+        root.innerHTML = `<div class="card">No tests available.</div>`;
+        return;
+      }
+
+      const t = tests[0];
+      root.innerHTML = `
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+            <div>
+              <h1 class="card-title">${t.title}</h1>
+              <span class="role-pill">${t.category}</span>
+            </div>
+            <div style="color:var(--text-muted); font-weight:600;">⏱️ ${t.durationMinutes} mins | 🏆 ${t.totalMarks} Marks</div>
+          </div>
+        </div>
+        <div id="test-content">
+          <form id="test-form" class="card">
+            ${t.questions.map((q, idx) => `
+              <div style="margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid var(--border);">
+                <div style="font-weight:600; margin-bottom:0.75rem;">Q${idx + 1}. ${q.questionText}</div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.5rem;">
+                  ${Object.entries(q.options).map(([optKey, optVal]) => `
+                    <label style="display:flex; align-items:center; gap:0.5rem; padding:0.5rem; border:1px solid var(--border); border-radius:6px; cursor:pointer;">
+                      <input type="radio" name="q_${q.id || q._id}" value="${optKey}" required>
+                      <span><strong>${optKey}:</strong> ${optVal}</span>
+                    </label>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+            <button type="submit" class="btn btn-primary" style="margin-top:0.5rem;">Submit Assessment (Auto Score)</button>
+          </form>
+        </div>
+      `;
+
+      document.getElementById('test-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const answers = {};
+        t.questions.forEach(q => {
+          const key = q.id || q._id;
+          const selected = document.querySelector(`input[name="q_${key}"]:checked`);
+          if (selected) answers[key] = selected.value;
+        });
+
+        const testId = t.id || t._id;
+        const res = await fetch(`/api/tests/${testId}/submit`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ answers })
+        });
+        const data = await res.json();
+        if (data.success) {
+          const r = data.result;
+          document.getElementById('test-content').innerHTML = `
+            <div class="card" style="text-align:center; padding:2rem;">
+              <div style="font-size:2.5rem;">🎯</div>
+              <h2 style="margin:0.5rem 0;">Assessment Completed!</h2>
+              <div style="font-size:2.25rem; font-weight:800; color:var(--primary); margin:0.75rem 0;">
+                Score: ${r.score} / ${r.totalMarks} (${r.percentage})
+              </div>
+              <div style="font-weight:700; color:${r.status === 'PASSED' ? 'var(--success)' : 'var(--warning)'}; margin-bottom:1.5rem;">
+                Status: ${r.status}
+              </div>
+              <div style="max-width:500px; margin:0 auto 1.5rem auto; text-align:left;">
+                ${r.details.map((d, i) => `
+                  <div style="padding:0.4rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between;">
+                    <span>Question #${i + 1}</span>
+                    <span>Selected: <strong>${d.selectedOption}</strong> | Correct: <strong>${d.correctOption}</strong> ${d.isCorrect ? '✅ (+1)' : '❌ (0)'}</span>
+                  </div>
+                `).join('')}
+              </div>
+              <button class="btn btn-primary" onclick="navigate('tests')">Retake Test</button>
+            </div>
+          `;
+        }
+      });
+    }
+
+    async function renderRecruiterDashboard() {
+      const root = document.getElementById('app-root');
+      let apps = [];
+      try {
+        const res = await fetch('/api/applications', { headers: { Authorization: `Bearer ${token}` } });
+        const data = await res.json();
+        if (data.success) apps = data.data;
+      } catch (e) {}
+
+      root.innerHTML = `
+        <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #334155 100%); color: #ffffff;">
+          <h1 style="font-size: 1.75rem; font-weight: 700;">Recruiter Evaluation Portal</h1>
+          <p style="opacity: 0.9; margin-top: 0.25rem;">Talent Acquisition Dashboard • ${currentUser.name}</p>
+        </div>
+        <div id="rec-alert"></div>
+        <div class="card">
+          <h2 class="card-title">Candidate Applications Review (IPR-F-017)</h2>
+          <p style="color:var(--text-muted); font-size:0.875rem; margin-bottom:1rem;">Evaluate applicants and update status in real-time</p>
+          <table class="data-table">
+            <thead>
+              <tr><th>Candidate</th><th>Internship Role</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              ${apps.map(a => {
+                const id = a.id || a._id;
+                return `
+                  <tr>
+                    <td><strong>${a.student?.name || 'Candidate'}</strong><div style="font-size:0.8rem; color:var(--text-muted);">${a.student?.email || 'student@pes.edu'}</div></td>
+                    <td>${a.internship?.title || 'Internship'}</td>
+                    <td><span class="${a.status === 'Shortlisted' ? 'badge-shortlisted' : a.status === 'Rejected' ? 'badge-rejected' : 'badge-submitted'}">${a.status}</span></td>
+                    <td>
+                      <div style="display:flex; gap:0.4rem;">
+                        <button class="btn btn-success" style="padding:0.25rem 0.5rem; font-size:0.8rem;" onclick="updateAppStatus('${id}', 'Shortlisted')">Shortlist</button>
+                        <button class="btn btn-danger" style="padding:0.25rem 0.5rem; font-size:0.8rem;" onclick="updateAppStatus('${id}', 'Rejected')">Reject</button>
+                      </div>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    async function updateAppStatus(id, newStatus) {
+      try {
+        const res = await fetch(`/api/applications/${id}/status`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('rec-alert').innerHTML = `<div class="alert alert-success">Application status updated to ${newStatus}.</div>`;
+          render();
+        }
+      } catch (e) {}
+    }
+
+    async function renderAdminDashboard() {
+      const root = document.getElementById('app-root');
+      let stats = { registeredStudents: 412, activeInternships: 45, aptitudeTestsConducted: 890 };
+      let users = [];
+      try {
+        const [sRes, uRes] = await Promise.all([
+          fetch('/api/admin/stats', { headers: { Authorization: `Bearer ${token}` } }),
+          fetch('/api/admin/users', { headers: { Authorization: `Bearer ${token}` } })
+        ]);
+        const sData = await sRes.json();
+        const uData = await uRes.json();
+        if (sData.success) stats = sData.data;
+        if (uData.success) users = uData.data;
+      } catch (e) {}
+
+      root.innerHTML = `
+        <div class="card" style="background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: #ffffff;">
+          <h1 style="font-size: 1.75rem; font-weight: 700;">System Administrator Portal</h1>
+          <p style="opacity: 0.9; margin-top: 0.25rem;">Platform Governance • Authenticated as: ${currentUser.name}</p>
+        </div>
+        <div class="grid-3">
+          <div class="stat-box"><span class="stat-num">${stats.registeredStudents}</span><span class="stat-label">Total Registered Students</span></div>
+          <div class="stat-box"><span class="stat-num">${stats.activeInternships}</span><span class="stat-label">Active Internships</span></div>
+          <div class="stat-box"><span class="stat-num">${stats.aptitudeTestsConducted}</span><span class="stat-label">Aptitude Tests Conducted</span></div>
+        </div>
+        <div class="card">
+          <h2 class="card-title">User Accounts Governance (IPR-F-018)</h2>
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr></thead>
+            <tbody>
+              ${users.map(u => `
+                <tr>
+                  <td><strong>${u.name}</strong></td>
+                  <td>${u.email}</td>
+                  <td><span class="role-pill">${u.role}</span></td>
+                  <td><span class="badge-shortlisted">Active</span></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>

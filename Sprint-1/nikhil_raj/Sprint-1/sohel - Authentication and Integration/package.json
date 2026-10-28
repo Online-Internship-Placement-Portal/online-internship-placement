@@ -1,0 +1,22 @@
+{
+  "name": "portal-auth-integration",
+  "version": "1.0.0",
+  "description": "Sprint 1 Authentication and Integration Module - Online Internship & Placement Preparation Portal",
+  "author": "Sohel Mahibubasa Chapparband (PES2UG25CS826)",
+  "license": "ISC",
+  "main": "controllers/authController.js",
+  "scripts": {
+    "test": "node integration/testRunner.js",
+    "test:jest": "jest --runInBand --detectOpenHandles"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "express": "^4.19.2",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
