@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node Sprint-1/sohel/integration/testRunner.js",
+    "test": "node \"Sprint-1/sohel - Authentication and Integration/integration/testRunner.js\"",
     "seed": "node Sprint-1/dheeraj/seed/seed.js"
   },
   "dependencies": {
