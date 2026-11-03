@@ -7,12 +7,19 @@
 
 const express = require('express');
 const router = express.Router();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 let authMiddleware, rbacMiddleware;
 try {
   authMiddleware = require('../../../sohel - Authentication and Integration/middleware/authMiddleware');
   rbacMiddleware = require('../../../sohel - Authentication and Integration/middleware/rbacMiddleware');
 } catch (e) {
+<<<<<<< HEAD
+  authMiddleware = require('../../../sohel/middleware/authMiddleware');
+  rbacMiddleware = require('../../../sohel/middleware/rbacMiddleware');
+=======
   try {
     authMiddleware = require('../../../sohel/middleware/authMiddleware');
     rbacMiddleware = require('../../../sohel/middleware/rbacMiddleware');
@@ -20,6 +27,7 @@ try {
     authMiddleware = { authenticateToken: (req, res, next) => next() };
     rbacMiddleware = { authorizeRoles: () => (req, res, next) => next() };
   }
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 }
 const { authenticateToken } = authMiddleware;
 const { authorizeRoles } = rbacMiddleware;
@@ -74,6 +82,12 @@ const getMongooseModels = () => {
   try {
     const mongoose = require('mongoose');
     if (mongoose.connection && mongoose.connection.readyState === 1) {
+<<<<<<< HEAD
+      return {
+        Internship: mongoose.model('Internship'),
+        Application: mongoose.model('Application')
+      };
+=======
       let Internship, Application;
       try {
         Internship = mongoose.model('Internship');
@@ -94,6 +108,7 @@ const getMongooseModels = () => {
         }
       }
       return { Internship, Application };
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
     }
   } catch (e) {}
   return null;
@@ -199,7 +214,11 @@ router.post('/', authenticateToken, authorizeRoles('recruiter', 'admin'), async 
         type: type || 'Full-time',
         stipend: stipend || 'Competitive',
         deadline: new Date(deadline),
+<<<<<<< HEAD
+        postedBy: req.user.id
+=======
         postedBy: req.user?.id || 'recruiter_001'
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
       });
       return res.status(201).json({ success: true, message: 'Internship created successfully.', data: newInternship });
     }
@@ -216,7 +235,11 @@ router.post('/', authenticateToken, authorizeRoles('recruiter', 'admin'), async 
       stipend: stipend || 'Competitive',
       deadline,
       status: 'Open',
+<<<<<<< HEAD
+      postedBy: req.user.id
+=======
       postedBy: req.user?.id || 'recruiter_001'
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
     };
     inMemoryInternships.unshift(item);
     res.status(201).json({ success: true, message: 'Internship created successfully.', data: item });
@@ -232,11 +255,19 @@ router.post('/', authenticateToken, authorizeRoles('recruiter', 'admin'), async 
 router.post('/:id/applications', authenticateToken, authorizeRoles('student'), async (req, res, next) => {
   try {
     const internshipId = req.params.id;
+<<<<<<< HEAD
+    const studentId = req.user.id;
+=======
     const studentId = req.user?.id || 'usr_student_01';
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
     const { resume, coverNote } = req.body;
 
     const models = getMongooseModels();
     if (models) {
+<<<<<<< HEAD
+      // 1. Check if application already exists (IPR-F-009 / TC-Int-04)
+=======
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
       const existingApp = await models.Application.findOne({
         student: studentId,
         internship: internshipId

@@ -10,10 +10,18 @@ const cors = require('cors');
 const requestLogger = require('./middleware/requestLogger');
 const errorHandler = require('./middleware/errorHandler');
 
+<<<<<<< HEAD
+// Route modules
+=======
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 let authRoutes;
 try {
   authRoutes = require('../../sohel - Authentication and Integration/routes/authRoutes');
 } catch (e) {
+<<<<<<< HEAD
+  authRoutes = require('../../sohel/routes/authRoutes');
+}
+=======
   try {
     authRoutes = require('../../sohel/routes/authRoutes');
   } catch (e2) {
@@ -21,6 +29,7 @@ try {
   }
 }
 
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 const internshipRoutesModule = require('./routes/internshipRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 const testRoutes = require('./routes/testRoutes');
@@ -29,6 +38,10 @@ const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 
+<<<<<<< HEAD
+// Security and utility middleware
+=======
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -38,6 +51,10 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(requestLogger);
 
+<<<<<<< HEAD
+// Health check endpoint (IPR-NF-001, IPR-NF-002)
+=======
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'UP',
@@ -47,6 +64,10 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
+// Mount application API modules (SAD Section 4.3 API Design)
+=======
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 app.use('/api/auth', authRoutes);
 app.use('/api/internships', internshipRoutesModule.router);
 app.use('/api/applications', applicationRoutes);
@@ -54,6 +75,10 @@ app.use('/api/tests', testRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/admin', adminRoutes);
 
+<<<<<<< HEAD
+// Catch-all 404 handler for undefined endpoints
+=======
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 app.use((req, res, next) => {
   res.status(404).json({
     success: false,
@@ -62,6 +87,10 @@ app.use((req, res, next) => {
   });
 });
 
+<<<<<<< HEAD
+// Centralized error handling middleware (SAD Section 4.4)
+=======
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 app.use(errorHandler);
 
 module.exports = app;

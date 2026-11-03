@@ -7,12 +7,19 @@
 
 const express = require('express');
 const router = express.Router();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 let authMiddleware, rbacMiddleware;
 try {
   authMiddleware = require('../../../sohel - Authentication and Integration/middleware/authMiddleware');
   rbacMiddleware = require('../../../sohel - Authentication and Integration/middleware/rbacMiddleware');
 } catch (e) {
+<<<<<<< HEAD
+  authMiddleware = require('../../../sohel/middleware/authMiddleware');
+  rbacMiddleware = require('../../../sohel/middleware/rbacMiddleware');
+=======
   try {
     authMiddleware = require('../../../sohel/middleware/authMiddleware');
     rbacMiddleware = require('../../../sohel/middleware/rbacMiddleware');
@@ -20,6 +27,7 @@ try {
     authMiddleware = { authenticateToken: (req, res, next) => next() };
     rbacMiddleware = { authorizeRoles: () => (req, res, next) => next() };
   }
+>>>>>>> 058591c6d77ab7d945c03a1ea584471e64c437c0
 }
 const { authenticateToken } = authMiddleware;
 const { authorizeRoles } = rbacMiddleware;
