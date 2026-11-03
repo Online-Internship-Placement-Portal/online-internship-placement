@@ -57,7 +57,19 @@ const getUserModel = () => {
   try {
     const mongoose = require('mongoose');
     if (mongoose.connection && mongoose.connection.readyState === 1) {
-      return mongoose.model('User');
+      try {
+        return mongoose.model('User');
+      } catch (e) {
+        try {
+          return require('../../dheeraj/models/User');
+        } catch (err) {
+          try {
+            return require('../../Dheeraj/models/User');
+          } catch (err2) {
+            return null;
+          }
+        }
+      }
     }
   } catch (e) {
     // MongoDB model not active, fallback to in-memory store

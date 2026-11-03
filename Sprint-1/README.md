@@ -30,7 +30,7 @@ Sprint 1 focuses on setting up the project foundation, developing the initial fr
 | **NAVYA R** | PES2UG24CS308 | Frontend / User Interface | [`Sprint-1/navya/`](./navya/) |
 | **Nikhil Raj G** | PES2UG24CS319 | Backend Setup | [`Sprint-1/nikhil_raj/`](./nikhil_raj/) |
 | **Patnaikuni Sai Dheeraj** | PES2UG24CS341 | Database Setup | [`Sprint-1/dheeraj/`](./dheeraj/) |
-| **Sohel Mahibubasa Chapparband** | PES2UG25CS826 | Authentication and Integration | [`Sprint-1/sohel/`](./sohel/) |
+| **Sohel Mahibubasa Chapparband** | PES2UG25CS826 | Authentication and Integration | [`Sprint-1/sohel - Authentication and Integration/`](./sohel%20-%20Authentication%20and%20Integration/) |
 
 ### Member 1 — NAVYA R: Frontend / User Interface
 - Set up the React frontend.
