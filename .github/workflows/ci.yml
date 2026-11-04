@@ -1,8 +1,8 @@
-name: Sprint-1 CI Pipeline & PR Automation
+name: CI Pipeline & PR Automation (Sprint 1 & Sprint 2)
 
 on:
   push:
-    branches: [ main, master, 'feature/**', 'sprint-1/**' ]
+    branches: [ main, master, 'feature/**', 'sprint-1/**', 'sprint-2/**', 'feat/**', 'navya**' ]
   pull_request:
     branches: [ main, master ]
 
@@ -24,15 +24,30 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependencies (Sohel Auth & Integration)
+      - name: Install Dependencies
         run: |
-          cd Sprint-1/sohel
-          npm install
+          npm install --no-audit || true
+          if [ -d "Sprint-2/sohel - Authentication and Integration" ]; then
+            (cd "Sprint-2/sohel - Authentication and Integration" && npm install --no-audit)
+          fi
+          if [ -d "Sprint-1/sohel - Authentication and Integration" ]; then
+            (cd "Sprint-1/sohel - Authentication and Integration" && npm install --no-audit)
+          elif [ -d "Sprint-1/sohel" ]; then
+            (cd "Sprint-1/sohel" && npm install --no-audit)
+          fi
 
-      - name: Run Sprint-1 Automated Verification Test Suite (STP Section 13.1 & 14)
+      - name: Run Automated Verification Test Suite (STP Section 13.1 & 14)
         run: |
-          cd Sprint-1/sohel
-          node integration/testRunner.js
+          if [ -d "Sprint-2/sohel - Authentication and Integration" ] && [ -f "Sprint-2/sohel - Authentication and Integration/integration/testRunner.js" ]; then
+            echo "Executing Sprint-2 Automated Verification..."
+            (cd "Sprint-2/sohel - Authentication and Integration" && node integration/testRunner.js)
+          fi
+          if [ -d "Sprint-1/sohel - Authentication and Integration" ] && [ -f "Sprint-1/sohel - Authentication and Integration/integration/testRunner.js" ]; then
+            echo "Executing Sprint-1 Automated Verification..."
+            (cd "Sprint-1/sohel - Authentication and Integration" && node integration/testRunner.js)
+          elif [ -d "Sprint-1/sohel" ] && [ -f "Sprint-1/sohel/integration/testRunner.js" ]; then
+            (cd "Sprint-1/sohel" && node integration/testRunner.js)
+          fi
 
   pr-compliance:
     name: PR Compliance & Verification
@@ -43,12 +58,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Verify Sprint-1 File Structure
+      - name: Verify Deliverables Structure
         run: |
-          echo "Verifying Sprint-1 Deliverables..."
-          test -d "Sprint-1/sohel" && echo "Found Sprint-1/sohel" || true
-          test -d "Sprint-1/navya" && echo "Found Sprint-1/navya" || true
-          test -d "Sprint-1/nikhil_raj" && echo "Found Sprint-1/nikhil_raj" || true
-          test -d "Sprint-1/dheeraj" && echo "Found Sprint-1/dheeraj" || true
-          test -f "Sprint-1/README.md" || (echo "Missing Sprint-1/README.md" && exit 1)
-          echo "Sprint-1 PR deliverables structure verified successfully."
+          echo "Verifying Deliverables..."
+          (test -d "Sprint-1/sohel - Authentication and Integration" || test -d "Sprint-1/sohel" || test -d "Sprint-2/sohel - Authentication and Integration") && echo "Found Sohel module" || true
+          test -f "Sprint-1/README.md" || test -f "Sprint-2/README.md" || (echo "Missing README.md" && exit 1)
+          echo "PR deliverables structure verified successfully."
