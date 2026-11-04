@@ -1,0 +1,14 @@
+{
+  "name": "portal-database-sprint2",
+  "version": "2.0.0",
+  "description": "Sprint-2 Database Setup & Schemas - Online Internship & Placement Preparation Portal",
+  "author": "Patnaikuni Sai Dheeraj (PES2UG24CS341)",
+  "license": "ISC",
+  "scripts": {
+    "seed": "node seed/seed.js"
+  },
+  "dependencies": {
+    "mongoose": "^8.3.1",
+    "bcryptjs": "^2.4.3"
+  }
+}
