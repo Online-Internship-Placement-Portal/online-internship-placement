@@ -9,11 +9,15 @@ const mongoose = require('mongoose');
 
 const connectDB = async (customUri) => {
   const uri = customUri || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/internship_placement_portal';
+  const timeoutValue = Number(process.env.MONGO_SERVER_SELECTION_TIMEOUT_MS);
+  const serverSelectionTimeoutMS = Number.isFinite(timeoutValue) && timeoutValue > 0
+    ? timeoutValue
+    : 5000;
 
   try {
     const conn = await mongoose.connect(uri, {
       autoIndex: true,
-      serverSelectionTimeoutMS: 5000
+      serverSelectionTimeoutMS
     });
     console.log(`[MongoDB] Connected successfully to Sprint-2 database: ${conn.connection.host}/${conn.connection.name}`);
     return conn;
