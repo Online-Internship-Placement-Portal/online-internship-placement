@@ -23,8 +23,7 @@ async function seedDatabase() {
   console.log('[Sprint-2 Seeder] Connecting to MongoDB...');
   const conn = await connectDB();
   if (!conn) {
-    console.log('[Sprint-2 Seeder] Could not connect to MongoDB. In-memory data store will be used for execution.');
-    return;
+    throw new Error('[Sprint-2 Seeder] Could not connect to MongoDB. Set MONGO_URI and ensure the database is available before seeding.');
   }
 
   try {
