@@ -1,0 +1,16 @@
+{
+  "name": "portal-backend-sprint2",
+  "version": "2.0.0",
+  "description": "Sprint-2 Backend Setup & REST APIs - Online Internship & Placement Preparation Portal",
+  "author": "Nikhil Raj G (PES2UG24CS319)",
+  "license": "ISC",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  }
+}
