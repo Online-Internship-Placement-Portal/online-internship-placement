@@ -36,8 +36,12 @@ In Sprint-2, the database subsystem was expanded from the foundational schema ba
 
 ## 3. Running the Seeder
 
+Set `MONGO_URI` to the MongoDB connection string for the database you want to seed. If it is omitted, the connection helper uses the local `internship_placement_portal` database. The seeder clears its target collections before inserting the sample records, so use a development database.
+
 ```bash
 cd "Sprint-2/dheeraj"
 npm install
 npm run seed
 ```
+
+The connection timeout defaults to 5 seconds. Set `MONGO_SERVER_SELECTION_TIMEOUT_MS` to a positive number of milliseconds to change it.
