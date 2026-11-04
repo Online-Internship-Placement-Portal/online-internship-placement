@@ -1,0 +1,303 @@
+{
+  "users": [
+    {
+      "name": "Sohel Mahibubasa Chapparband",
+      "email": "sohel@pes.edu",
+      "password": "Password123",
+      "role": "student",
+      "department": "Computer Science and Engineering",
+      "phone": "+91-9876543210",
+      "status": "active"
+    },
+    {
+      "name": "Navya R",
+      "email": "navya@pes.edu",
+      "password": "Password123",
+      "role": "student",
+      "department": "Computer Science and Engineering",
+      "phone": "+91-9876543211",
+      "status": "active"
+    },
+    {
+      "name": "Nikhil Raj G",
+      "email": "nikhil@pes.edu",
+      "password": "Password123",
+      "role": "student",
+      "department": "Computer Science and Engineering",
+      "phone": "+91-9876543214",
+      "status": "active"
+    },
+    {
+      "name": "Patnaikuni Sai Dheeraj",
+      "email": "dheeraj@pes.edu",
+      "password": "Password123",
+      "role": "student",
+      "department": "Computer Science and Engineering",
+      "phone": "+91-9876543215",
+      "status": "active"
+    },
+    {
+      "name": "Google Campus Recruiter",
+      "email": "recruiter@google.com",
+      "password": "RecruiterPass123",
+      "role": "recruiter",
+      "department": "Talent Acquisition & University Relations",
+      "phone": "+91-9876543212",
+      "status": "active"
+    },
+    {
+      "name": "Microsoft University Hiring",
+      "email": "recruiter@microsoft.com",
+      "password": "RecruiterPass123",
+      "role": "recruiter",
+      "department": "Engineering Recruitment",
+      "phone": "+91-9876543216",
+      "status": "active"
+    },
+    {
+      "name": "Placement Cell Administrator",
+      "email": "admin@pes.edu",
+      "password": "AdminPass123",
+      "role": "admin",
+      "department": "Department of Placements & Industry Relations",
+      "phone": "+91-9876543213",
+      "status": "active"
+    }
+  ],
+  "studentProfiles": [
+    {
+      "email": "sohel@pes.edu",
+      "usn": "PES2UG25CS826",
+      "cgpa": 8.92,
+      "semester": 5,
+      "department": "Computer Science and Engineering",
+      "skills": ["JavaScript", "Node.js", "React.js", "Express.js", "MongoDB", "Data Structures", "Docker", "Git"],
+      "resumeUrl": "https://storage.portal.pes.edu/resumes/PES2UG25CS826_Resume.pdf",
+      "githubUrl": "https://github.com/sohel832",
+      "linkedinUrl": "https://linkedin.com/in/sohel-chapparband",
+      "portfolioUrl": "https://sohel.dev",
+      "bio": "Pre-final year Computer Science undergraduate at PES University. Focused on scalable web architectures, microservices, and distributed backend systems.",
+      "placementStatus": "Eligible"
+    },
+    {
+      "email": "navya@pes.edu",
+      "usn": "PES2UG24CS308",
+      "cgpa": 9.15,
+      "semester": 5,
+      "department": "Computer Science and Engineering",
+      "skills": ["React.js", "TypeScript", "Tailwind CSS", "UI/UX Design", "Next.js", "GraphQL", "Figma"],
+      "resumeUrl": "https://storage.portal.pes.edu/resumes/PES2UG24CS308_Resume.pdf",
+      "githubUrl": "https://github.com/navya-pes",
+      "linkedinUrl": "https://linkedin.com/in/navya-r",
+      "portfolioUrl": "https://navya.design",
+      "bio": "Frontend engineer dedicated to crafting intuitive, accessible, and high-performance user interfaces.",
+      "placementStatus": "Eligible"
+    }
+  ],
+  "internships": [
+    {
+      "title": "Software Development Engineer Intern (Summer 2027)",
+      "company": "Google",
+      "description": "Join Google's core engineering organization in Bengaluru. You will work alongside engineering teams on high-throughput backend services, search algorithms, and distributed storage infrastructure.",
+      "location": "Bengaluru, India",
+      "type": "Full-time",
+      "stipend": "₹1,20,000 / month",
+      "requirements": ["Data Structures & Algorithms", "Proficiency in C++, Java, or Go", "Object-Oriented Design", "Concurrency & Multithreading"],
+      "eligibilityCriteria": {
+        "minCgpa": 7.5,
+        "allowedDepartments": ["Computer Science and Engineering", "Information Science and Engineering"]
+      },
+      "openings": 8,
+      "deadline": "2027-02-15T00:00:00.000Z",
+      "status": "Open"
+    },
+    {
+      "title": "Full Stack Cloud Platform Intern",
+      "company": "Microsoft",
+      "description": "Develop full-stack web tools powering Azure Developer Experience. Build modern dashboards in React, design RESTful APIs in Node.js/C#, and orchestrate cloud deployment pipelines.",
+      "location": "Hyderabad, India",
+      "type": "Full-time",
+      "stipend": "₹95,000 / month",
+      "requirements": ["React.js / Modern TypeScript", "Node.js / Express or ASP.NET", "RESTful API Design", "Relational & NoSQL Databases"],
+      "eligibilityCriteria": {
+        "minCgpa": 7.0,
+        "allowedDepartments": ["Computer Science and Engineering", "Information Science and Engineering", "Electronics and Communication"]
+      },
+      "openings": 5,
+      "deadline": "2027-02-28T00:00:00.000Z",
+      "status": "Open"
+    },
+    {
+      "title": "Cloud Solutions & DevOps Intern",
+      "company": "Amazon AWS",
+      "description": "Automate cloud deployment pipelines, monitor containerized microservices, build infrastructure-as-code scripts, and support enterprise cloud customers across AWS regions.",
+      "location": "Bengaluru, India",
+      "type": "Remote",
+      "stipend": "₹85,000 / month",
+      "requirements": ["Linux Systems Administration", "Bash / Python Scripting", "Docker & Kubernetes Basics", "AWS Cloud Core Services"],
+      "eligibilityCriteria": {
+        "minCgpa": 7.0,
+        "allowedDepartments": ["Computer Science and Engineering", "Information Science and Engineering"]
+      },
+      "openings": 4,
+      "deadline": "2027-03-15T00:00:00.000Z",
+      "status": "Open"
+    },
+    {
+      "title": "Machine Learning & Data Intelligence Intern",
+      "company": "Adobe",
+      "description": "Work on computer vision and generative content pipelines. Train deep learning models, optimize inference latency on edge devices, and build Python APIs.",
+      "location": "Noida, India",
+      "type": "Hybrid",
+      "stipend": "₹1,00,000 / month",
+      "requirements": ["Python / PyTorch / TensorFlow", "Linear Algebra & Probability", "Computer Vision Basics", "Data Preprocessing"],
+      "eligibilityCriteria": {
+        "minCgpa": 8.0,
+        "allowedDepartments": ["Computer Science and Engineering"]
+      },
+      "openings": 3,
+      "deadline": "2027-03-30T00:00:00.000Z",
+      "status": "Open"
+    }
+  ],
+  "aptitudeTests": [
+    {
+      "title": "Technical & Core CS Assessment 2026",
+      "category": "Technical & Data Structures",
+      "durationMinutes": 30,
+      "totalMarks": 5,
+      "passingScore": 60,
+      "instructions": "This assessment evaluates fundamental Data Structures, Algorithms, and Operating Systems concepts. Answer all 5 questions within 30 minutes.",
+      "questions": [
+        {
+          "questionText": "What is the worst-case time complexity of QuickSort when the pivot chosen is always the extreme element in a sorted array?",
+          "options": {
+            "A": "O(n log n)",
+            "B": "O(n)",
+            "C": "O(n^2)",
+            "D": "O(log n)"
+          },
+          "correctOption": "C",
+          "marks": 1,
+          "explanation": "When an extreme element is always chosen as pivot in a sorted array, the partition yields subproblems of size 0 and n-1, producing an O(n^2) recursion depth."
+        },
+        {
+          "questionText": "Which data structure is primarily used in Breadth-First Search (BFS) graph traversal?",
+          "options": {
+            "A": "Stack",
+            "B": "Queue",
+            "C": "Priority Queue",
+            "D": "Binary Search Tree"
+          },
+          "correctOption": "B",
+          "marks": 1,
+          "explanation": "BFS explores vertices in order of distance from source, using a First-In-First-Out (FIFO) Queue."
+        },
+        {
+          "questionText": "In relational database design, which normal form eliminates transitive functional dependencies?",
+          "options": {
+            "A": "First Normal Form (1NF)",
+            "B": "Second Normal Form (2NF)",
+            "C": "Third Normal Form (3NF)",
+            "D": "Boyce-Codd Normal Form (BCNF)"
+          },
+          "correctOption": "C",
+          "marks": 1,
+          "explanation": "3NF requires a table to be in 2NF and have no transitive functional dependencies of non-prime attributes on candidate keys."
+        },
+        {
+          "questionText": "What HTTP status code is most appropriate when a client attempts to submit a duplicate unique application?",
+          "options": {
+            "A": "400 Bad Request",
+            "B": "401 Unauthorized",
+            "C": "409 Conflict",
+            "D": "422 Unprocessable Entity"
+          },
+          "correctOption": "C",
+          "marks": 1,
+          "explanation": "RFC 9110 specifies 409 Conflict when a request cannot be completed due to a conflict with the current state of the target resource, such as duplicate unique constraint violation."
+        },
+        {
+          "questionText": "In a distributed web system, what does the CAP theorem state regarding network partitions?",
+          "options": {
+            "A": "You must sacrifice both Consistency and Availability",
+            "B": "You can achieve Consistency, Availability, and Partition Tolerance simultaneously",
+            "C": "Under a network partition, a distributed store must choose between Consistency and Availability",
+            "D": "Network partitions can be eliminated with redundant fiber optic links"
+          },
+          "correctOption": "C",
+          "marks": 1,
+          "explanation": "The CAP theorem states that any distributed data store can guarantee at most two of the three properties: Consistency, Availability, and Partition tolerance."
+        }
+      ]
+    },
+    {
+      "title": "Quantitative & Logical Aptitude Test",
+      "category": "Quantitative Aptitude",
+      "durationMinutes": 25,
+      "totalMarks": 4,
+      "passingScore": 50,
+      "instructions": "Quantitative problems covering Speed, Distance, Probability, and Work. Calculators are not allowed.",
+      "questions": [
+        {
+          "questionText": "A train running at 72 km/hr crosses an electric pole in 15 seconds. What is the length of the train in metres?",
+          "options": {
+            "A": "250 metres",
+            "B": "300 metres",
+            "C": "320 metres",
+            "D": "360 metres"
+          },
+          "correctOption": "B",
+          "marks": 1,
+          "explanation": "Speed = 72 * (5/18) = 20 m/s. Distance (train length) = Speed * Time = 20 * 15 = 300 metres."
+        },
+        {
+          "questionText": "A and B together can do a piece of work in 12 days, while B alone can finish it in 30 days. In how many days can A alone complete the work?",
+          "options": {
+            "A": "18 days",
+            "B": "20 days",
+            "C": "24 days",
+            "D": "25 days"
+          },
+          "correctOption": "B",
+          "marks": 1,
+          "explanation": "1/A + 1/30 = 1/12 => 1/A = 1/12 - 1/30 = (5 - 2)/60 = 3/60 = 1/20. Thus A alone takes 20 days."
+        },
+        {
+          "questionText": "If two unbiased dice are thrown simultaneously, what is the probability of obtaining a total sum of 8?",
+          "options": {
+            "A": "5/36",
+            "B": "1/6",
+            "C": "7/36",
+            "D": "1/9"
+          },
+          "correctOption": "A",
+          "marks": 1,
+          "explanation": "Pairs with sum 8: (2,6), (3,5), (4,4), (5,3), (6,2) -> 5 outcomes out of 36. Probability = 5/36."
+        },
+        {
+          "questionText": "Find the next number in the series: 3, 7, 15, 31, 63, ?",
+          "options": {
+            "A": "95",
+            "B": "112",
+            "C": "127",
+            "D": "129"
+          },
+          "correctOption": "C",
+          "marks": 1,
+          "explanation": "Each term is 2x the previous term + 1: 63 * 2 + 1 = 127."
+        }
+      ]
+    }
+  ],
+  "preparationTopics": [
+    { "topic": "Arrays & Two Pointer Techniques", "category": "Data Structures", "completed": true, "score": 95 },
+    { "topic": "Binary Search & Monotonic Predicates", "category": "Algorithms", "completed": true, "score": 90 },
+    { "topic": "Dynamic Programming & Tabulation", "category": "Algorithms", "completed": false, "score": 65 },
+    { "topic": "Trees & Binary Search Trees (BST)", "category": "Data Structures", "completed": true, "score": 85 },
+    { "topic": "Database Normalization & B+ Tree Indexing", "category": "Core CS Concepts", "completed": true, "score": 88 },
+    { "topic": "Operating Systems (Virtual Memory & Threads)", "category": "Core CS Concepts", "completed": false, "score": 70 },
+    { "topic": "Time & Work / Speed & Distance", "category": "Aptitude", "completed": true, "score": 92 },
+    { "topic": "System Design: Microservices & Caching", "category": "System Design", "completed": true, "score": 80 }
+  ]
+}
