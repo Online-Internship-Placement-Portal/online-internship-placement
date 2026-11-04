@@ -1,15 +1,19 @@
 {
   "name": "online-internship-placement-portal",
-  "version": "1.0.0",
-  "description": "Online Internship & Placement Preparation Portal - MERN Stack (Sprint-1)",
-  "author": "PES University CSE Department - Sprint 1 Team",
+  "version": "2.0.0",
+  "description": "Online Internship & Placement Preparation Portal - MERN Stack (Sprint-2 Final)",
+  "author": "PES University CSE Department - Sprint 2 Team",
   "license": "ISC",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "node \"Sprint-1/sohel - Authentication and Integration/integration/testRunner.js\"",
-    "seed": "node Sprint-1/dheeraj/seed/seed.js"
+    "test": "node \"Sprint-2/sohel - Authentication and Integration/integration/testRunner.js\"",
+    "test:sprint1": "node \"Sprint-1/sohel - Authentication and Integration/integration/testRunner.js\"",
+    "test:sprint2": "node \"Sprint-2/sohel - Authentication and Integration/integration/testRunner.js\"",
+    "seed": "node Sprint-2/dheeraj/seed/seed.js",
+    "seed:sprint1": "node Sprint-1/dheeraj/seed/seed.js",
+    "seed:sprint2": "node Sprint-2/dheeraj/seed/seed.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
