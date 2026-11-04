@@ -1,0 +1,17 @@
+{
+  "name": "portal-auth-integration-sprint2",
+  "version": "2.0.0",
+  "description": "Sprint-2 Authentication & System Integration Module - Online Internship & Placement Preparation Portal",
+  "author": "Sohel Mahibubasa Chapparband (PES2UG25CS826)",
+  "license": "ISC",
+  "main": "controllers/authController.js",
+  "scripts": {
+    "test": "node integration/testRunner.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "express": "^4.19.2",
+    "dotenv": "^16.4.5"
+  }
+}

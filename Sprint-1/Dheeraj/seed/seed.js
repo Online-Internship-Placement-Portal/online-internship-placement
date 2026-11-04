@@ -102,7 +102,9 @@ async function seedDatabase() {
   } catch (err) {
     console.error('[Seeder] Error during database seeding:', err);
   } finally {
-    await disconnectDB();
+    if (require.main === module) {
+      await disconnectDB();
+    }
   }
 }
 
