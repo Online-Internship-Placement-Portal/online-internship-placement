@@ -2,7 +2,7 @@ name: CI Pipeline & PR Automation (Sprint 1 & Sprint 2)
 
 on:
   push:
-    branches: [ main, master, 'feature/**', 'sprint-1/**', 'sprint-2/**', 'feat/**' ]
+    branches: [ main, master, 'feature/**', 'sprint-1/**', 'sprint-2/**', 'feat/**', 'navya**' ]
   pull_request:
     branches: [ main, master ]
 
