@@ -1,0 +1,11 @@
+{
+  "name": "portal-frontend-sprint2",
+  "version": "2.0.0",
+  "description": "Sprint-2 User Interface (React.js Frontend) - Online Internship & Placement Preparation Portal",
+  "author": "NAVYA R (PES2UG24CS308)",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
