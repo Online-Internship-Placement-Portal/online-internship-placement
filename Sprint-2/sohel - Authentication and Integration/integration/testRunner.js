@@ -13,6 +13,9 @@ const { JWT_SECRET, authenticateToken } = require('../middleware/authMiddleware'
 const { authorizeRoles } = require('../middleware/rbacMiddleware');
 const { sanitizeString, sanitizePayload } = require('../middleware/sanitizeMiddleware');
 const { inMemoryUsers, register, login } = require('../controllers/authController');
+const { SlidingWindowRateLimiter } = require('../middleware/rateLimitMiddleware');
+const { applySecurityHeaders } = require('../middleware/securityHeadersMiddleware');
+const { getSystemHealth } = require('../controllers/healthController');
 
 // Cross-functional controllers: load teammate modules if present (full workspace/post-merge),
 // otherwise gracefully fallback to built-in integration mock handlers for isolated PR verification.
@@ -181,7 +184,7 @@ async function runAllTests() {
   // ==========================================
   // 1. AUTHENTICATION & SECURITY (IPR-F-001, 002, SR-001, 002, 005)
   // ==========================================
-  console.log('-> [1/6] Running Authentication, Password Hashing & Sanitization Tests');
+  console.log('-> [1/7] Running Authentication, Password Hashing & Sanitization Tests');
 
   // Password Hashing
   const rawPass = 'PesStrongPassword2026';
@@ -232,7 +235,7 @@ async function runAllTests() {
   // ==========================================
   // 2. STUDENT PROFILE MANAGEMENT (IPR-F-004, IPR-F-005)
   // ==========================================
-  console.log('\n-> [2/6] Running Student Profile Management Tests');
+  console.log('\n-> [2/7] Running Student Profile Management Tests');
 
   let profileData = null;
   const mockProfGetReq = { user: { email: 'sohel@pes.edu', id: 'usr_student_01' } };
@@ -252,7 +255,7 @@ async function runAllTests() {
   // ==========================================
   // 3. INTERNSHIPS & APPLICATIONS (IPR-F-006, 007, 008, 009, 010, 016, 017)
   // ==========================================
-  console.log('\n-> [3/6] Running Internship Discovery & Application Duplicate Prevention Tests');
+  console.log('\n-> [3/7] Running Internship Discovery & Application Duplicate Prevention Tests');
 
   let internshipList = [];
   const mockIntReq = { query: { search: 'Google' } };
@@ -298,7 +301,7 @@ async function runAllTests() {
   // ==========================================
   // 4. APTITUDE TEST EVALUATION & HISTORY (IPR-F-011, 012, 013)
   // ==========================================
-  console.log('\n-> [4/6] Running Aptitude Test Evaluation & History Tracking Tests');
+  console.log('\n-> [4/7] Running Aptitude Test Evaluation & History Tracking Tests');
 
   let testObj = null;
   const mockTestGetReq = { params: { id: 'test_001' } };
@@ -313,11 +316,11 @@ async function runAllTests() {
     user: { id: 'usr_student_01', email: 'sohel@pes.edu' },
     body: {
       answers: {
-        'q_1_1': 'C', // QuickSort worst case
-        'q_1_2': 'B', // BFS Queue
-        'q_1_3': 'C', // 3NF
-        'q_1_4': 'C', // 409 Conflict
-        'q_1_5': 'C'  // CAP
+        'q_1_1': 'C',
+        'q_1_2': 'B',
+        'q_1_3': 'C',
+        'q_1_4': 'C',
+        'q_1_5': 'C'
       },
       durationTakenSeconds: 650
     }
@@ -336,7 +339,7 @@ async function runAllTests() {
   // ==========================================
   // 5. PREPARATION PROGRESS & ANALYTICS (IPR-F-014, IPR-F-015)
   // ==========================================
-  console.log('\n-> [5/6] Running Placement Preparation Progress & Analytics Tests');
+  console.log('\n-> [5/7] Running Placement Preparation Progress & Analytics Tests');
 
   let progData = null;
   const mockProgReq = { user: { id: 'usr_student_01' } };
@@ -356,7 +359,7 @@ async function runAllTests() {
   // ==========================================
   // 6. ADMINISTRATOR GOVERNANCE & NON-FUNCTIONAL PERFORMANCE (IPR-F-018, NF-001, NF-003)
   // ==========================================
-  console.log('\n-> [6/6] Running Admin Governance & Performance SLA Tests');
+  console.log('\n-> [6/7] Running Admin Governance & Performance SLA Tests');
 
   let adminMetrics = null;
   const mockAdminRes = { status: () => ({ json: (d) => { adminMetrics = d.data; } }) };
@@ -374,6 +377,59 @@ async function runAllTests() {
     if (t) concurrentOps++;
   }
   assert(concurrentOps === 500, 'Simulated 500 concurrent operations without system degradation', 'TC-Scale-01', 'IPR-NF-003');
+
+  // ==========================================
+  // 7. ADVANCED SECURITY CONTROLS & TELEMETRY (IPR-SR-002, 004, IPR-NF-002)
+  // ==========================================
+  console.log('\n-> [7/7] Running Advanced Rate Limiting, Security Headers & Telemetry Tests');
+
+  // Rate Limiting (IPR-SR-002, TC-Sec-06)
+  const testLimiter = new SlidingWindowRateLimiter(60000, 2);
+  const mw = testLimiter.middleware();
+  let rateLimitBlocked = false;
+  const mockLimitRes = {
+    setHeader: () => {},
+    status: (c) => ({
+      json: () => { if (c === 429) rateLimitBlocked = true; }
+    })
+  };
+  mw({ ip: '192.168.1.100' }, mockLimitRes, () => {});
+  mw({ ip: '192.168.1.100' }, mockLimitRes, () => {});
+  mw({ ip: '192.168.1.100' }, mockLimitRes, () => {});
+  assert(rateLimitBlocked, 'Sliding-window limiter enforces 429 Too Many Requests threshold', 'TC-Sec-06', 'IPR-SR-002');
+
+  // Security Headers (IPR-SR-004, TC-Sec-07)
+  const headersMap = {};
+  const mockHeaderRes = {
+    setHeader: (k, v) => { headersMap[k] = v; }
+  };
+  applySecurityHeaders({ path: '/api/auth/login' }, mockHeaderRes, () => {});
+  assert(
+    headersMap['X-Content-Type-Options'] === 'nosniff' &&
+    headersMap['X-Frame-Options'] === 'DENY' &&
+    headersMap['Strict-Transport-Security'] !== undefined,
+    'OWASP security headers (nosniff, DENY, HSTS) strictly enforced',
+    'TC-Sec-07',
+    'IPR-SR-004'
+  );
+
+  // Expired Token Rejection (TC-Sec-08)
+  const expToken = jwt.sign({ id: 'u1' }, JWT_SECRET, { expiresIn: -10 });
+  let expCaught = false;
+  try { jwt.verify(expToken, JWT_SECRET); } catch (e) { if (e.name === 'TokenExpiredError') expCaught = true; }
+  assert(expCaught, 'Expired JWT tokens automatically rejected by verification barrier', 'TC-Sec-08', 'IPR-SR-001');
+
+  // Signature Tampering Rejection (TC-Sec-09)
+  const forgedToken = jwt.sign({ id: 'u1', role: 'admin' }, 'wrong_secret_attack');
+  let forgedCaught = false;
+  try { jwt.verify(forgedToken, JWT_SECRET); } catch (e) { if (e.name === 'JsonWebTokenError') forgedCaught = true; }
+  assert(forgedCaught, 'Forged JWT signature triggers cryptographic verification rejection', 'TC-Sec-09', 'IPR-SR-001');
+
+  // System Health & Telemetry Diagnostics (IPR-NF-002, TC-Rel-01)
+  let healthPayload = null;
+  const mockHealthRes = { status: () => ({ json: (d) => { healthPayload = d.data; } }) };
+  getSystemHealth({}, mockHealthRes);
+  assert(healthPayload && healthPayload.status === 'UP' && healthPayload.processMemory.heapUsedMB > 0, 'Health check exposes runtime telemetry and memory metrics', 'TC-Rel-01', 'IPR-NF-002');
 
   // ==========================================
   // TEST EXECUTION SUMMARY (STP Section 14)
