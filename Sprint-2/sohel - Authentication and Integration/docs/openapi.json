@@ -1,0 +1,189 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Online Internship & Placement Preparation Portal API",
+    "version": "2.0.0",
+    "description": "Complete REST API specification for PES University Placement Portal (Sprint-2 Final). Implements JWT authentication, RBAC, duplicate prevention, and automated aptitude scoring.",
+    "contact": {
+      "name": "Sohel Mahibubasa Chapparband (PES2UG25CS826)",
+      "email": "sohelchapparband4@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local Development Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Provide JWT token in Authorization header: Bearer <token>"
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "role": { "type": "string", "enum": ["student", "recruiter", "admin"] },
+          "department": { "type": "string" }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string" }
+        }
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "required": ["name", "email", "password", "role"],
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string", "minLength": 6 },
+          "role": { "type": "string", "enum": ["student", "recruiter", "admin"] },
+          "department": { "type": "string" }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "message": { "type": "string" },
+          "data": { "type": "object" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "Register a new user account (IPR-F-001)",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegisterRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "User created successfully" },
+          "400": { "description": "Validation error or invalid input format" },
+          "409": { "description": "Conflict - Email already registered" }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Authenticate user & issue signed JWT (IPR-F-002)",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Authentication successful, returns JWT token" },
+          "401": { "description": "Unauthorized - Invalid email or password" }
+        }
+      }
+    },
+    "/api/profile/me": {
+      "get": {
+        "summary": "Retrieve authenticated student placement profile (IPR-F-004)",
+        "tags": ["Profile"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Student placement profile returned" },
+          "401": { "description": "Missing or expired authorization token" }
+        }
+      },
+      "put": {
+        "summary": "Update student CGPA, semester, skills & resume (IPR-F-005)",
+        "tags": ["Profile"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Profile updated successfully" },
+          "400": { "description": "Invalid CGPA range (must be 0.00 - 10.00)" }
+        }
+      }
+    },
+    "/api/internships": {
+      "get": {
+        "summary": "List and filter internship openings (IPR-F-006, IPR-F-007)",
+        "tags": ["Internships"],
+        "parameters": [
+          { "name": "search", "in": "query", "schema": { "type": "string" } },
+          { "name": "role", "in": "query", "schema": { "type": "string" } },
+          { "name": "location", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Filtered list of active internship openings" }
+        }
+      }
+    },
+    "/api/applications/apply/{id}": {
+      "post": {
+        "summary": "Submit internship application with duplicate blocker (IPR-F-008, IPR-F-009)",
+        "tags": ["Applications"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "201": { "description": "Application submitted successfully" },
+          "409": { "description": "Conflict - Duplicate application already exists for this internship" }
+        }
+      }
+    },
+    "/api/tests/{id}": {
+      "get": {
+        "summary": "Fetch aptitude test without leaking correct answers (IPR-F-011)",
+        "tags": ["Aptitude Tests"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Test questions retrieved (correct answers suppressed)" }
+        }
+      }
+    },
+    "/api/tests/{id}/submit": {
+      "post": {
+        "summary": "Submit answers and calculate auto-score (IPR-F-012)",
+        "tags": ["Aptitude Tests"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Score, percentage, and detailed answer review" }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "summary": "System diagnostics, uptime, and security health check (IPR-NF-002)",
+        "tags": ["Monitoring"],
+        "responses": {
+          "200": { "description": "System operational diagnostics returned" }
+        }
+      }
+    }
+  }
+}
