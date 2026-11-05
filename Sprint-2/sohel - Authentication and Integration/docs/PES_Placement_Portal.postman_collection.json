@@ -1,0 +1,108 @@
+{
+  "info": {
+    "name": "PES Online Internship & Placement Preparation Portal API Collection",
+    "description": "Postman Test Suite for Sprint-2 Verification (STP v1.0). Authored by Sohel Mahibubasa Chapparband (PES2UG25CS826).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register Student (IPR-F-001)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sohel Mahibubasa Chapparband\",\n  \"email\": \"sohel.postman@pes.edu\",\n  \"password\": \"Password@123\",\n  \"role\": \"student\",\n  \"department\": \"Computer Science and Engineering\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Login Student (IPR-F-002)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                  "var jsonData = pm.response.json();",
+                  "pm.test(\"Token returned\", function () { pm.expect(jsonData.token).to.not.be.empty; });",
+                  "pm.environment.set(\"authToken\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sohel.postman@pes.edu\",\n  \"password\": \"Password@123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Student Profile",
+      "item": [
+        {
+          "name": "Get My Profile (IPR-F-004)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{authToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/profile/me", "host": ["{{baseUrl}}"], "path": ["api", "profile", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Internships & Applications",
+      "item": [
+        {
+          "name": "List Internships (IPR-F-006)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/internships?search=Google", "host": ["{{baseUrl}}"], "path": ["api", "internships"], "query": [{ "key": "search", "value": "Google" }] }
+          }
+        },
+        {
+          "name": "Apply for Internship (IPR-F-008)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coverNote\": \"Excited to apply for Google SWE internship.\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/applications/apply/int_001", "host": ["{{baseUrl}}"], "path": ["api", "applications", "apply", "int_001"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Diagnostics",
+      "item": [
+        {
+          "name": "System Health Check (IPR-NF-002)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/health", "host": ["{{baseUrl}}"], "path": ["api", "health"] }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "authToken", "value": "" }
+  ]
+}
