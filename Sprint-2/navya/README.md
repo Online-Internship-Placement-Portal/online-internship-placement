@@ -39,3 +39,64 @@ In Sprint-2, the user interface was developed into a comprehensive, single-page 
 
 ### 6. Usability & Responsiveness (`IPR-NF-004`, `TC-UI-01`)
 - Responsive CSS Grid and Flexbox styling verified on mobile, tablet, and desktop viewports.
+
+
+---
+
+## 2. Modular Component Architecture
+
+```text
+Sprint-2/navya/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── admin/
+│   │   │   ├── AdminDashboardView.jsx
+│   │   │   └── UserManagementTable.jsx
+│   │   ├── auth/
+│   │   │   ├── LoginView.jsx
+│   │   │   └── StudentRegisterView.jsx
+│   │   ├── common/
+│   │   │   ├── AlertBanner.jsx
+│   │   │   ├── LoadingSpinner.jsx
+│   │   │   └── StatusBadge.jsx
+│   │   ├── layout/
+│   │   │   ├── Footer.jsx
+│   │   │   └── Navbar.jsx
+│   │   ├── recruiter/
+│   │   │   ├── PostInternshipForm.jsx
+│   │   │   └── RecruiterDashboardView.jsx
+│   │   └── student/
+│   │       ├── ApplicationTrackerView.jsx
+│   │       ├── AptitudeTestView.jsx
+│   │       ├── InternshipCatalogView.jsx
+│   │       ├── InternshipFilterBar.jsx
+│   │       ├── PrepChecklist.jsx
+│   │       ├── PreparationGauge.jsx
+│   │       ├── StudentDashboardView.jsx
+│   │       ├── StudentProfileView.jsx
+│   │       └── TestHistoryView.jsx
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   ├── useDebounce.js
+│   │   └── useTimer.js
+│   ├── services/
+│   │   ├── api.js
+│   │   ├── authService.js
+│   │   ├── internshipService.js
+│   │   └── testService.js
+│   ├── utils/
+│   │   └── validators.js
+│   ├── App.jsx
+│   ├── index.js
+│   └── styles.css
+└── tests/
+    └── uiSmokeTest.js
+```
+
+### Verify Frontend Structure
+```bash
+cd Sprint-2/navya
+node tests/uiSmokeTest.js
+```
