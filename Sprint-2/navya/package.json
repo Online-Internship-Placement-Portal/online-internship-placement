@@ -4,6 +4,9 @@
   "description": "Sprint-2 User Interface (React.js Frontend) - Online Internship & Placement Preparation Portal",
   "author": "NAVYA R (PES2UG24CS308)",
   "license": "ISC",
+  "scripts": {
+    "test": "node tests/uiSmokeTest.js"
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
