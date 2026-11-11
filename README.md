@@ -23,10 +23,10 @@ This repository contains the complete deliverables for **Sprint-1**, including:
 
 | S. No. | Student Name | SRN | Assigned Module / Role | Directory |
 | :---: | :--- | :--- | :--- | :--- |
-| 1 | **Sohel Mahibubasa Chapparband** | `PES2UG25CS826` | **Authentication and Integration** | [`Sprint-1/sohel/`](./Sprint-1/sohel/) |
-| 2 | **Navya R** | `PES2UG24CS308` | **User Interface (Frontend)** | [`Sprint-1/navya/`](./Sprint-1/navya/) |
-| 3 | **Nikhil Raj G** | `PES2UG24CS319` | **Backend Setup** | [`Sprint-1/nikhil_raj/`](./Sprint-1/nikhil_raj/) |
-| 4 | **Patnaikuni Sai Dheeraj** | `PES2UG24CS341` | **Database Setup** | [`Sprint-1/dheeraj/`](./Sprint-1/dheeraj/) |
+| 1 | **Sohel Mahibubasa Chapparband** | `PES2UG25CS826` | **DEVELOPER** | [`Sprint-1/sohel/`](./Sprint-1/sohel/) |
+| 2 | **Navya R** | `PES2UG24CS308` | **UNIT TESTING** | [`Sprint-1/navya/`](./Sprint-1/navya/) |
+| 3 | **Nikhil Raj G** | `PES2UG24CS319` | **DEVELOPER** | [`Sprint-1/nikhil_raj/`](./Sprint-1/nikhil_raj/) |
+| 4 | **Patnaikuni Sai Dheeraj** | `PES2UG24CS341` | **QA LEAD** | [`Sprint-1/dheeraj/`](./Sprint-1/dheeraj/) |
 
 ---
 
