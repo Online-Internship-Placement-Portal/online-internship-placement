@@ -14,3 +14,5 @@ module.exports = {
   JWT_SECRET: process.env.JWT_SECRET || 'portal_jwt_secret_key_development_pes_2026',
   CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:3000'
 };
+
+
