@@ -6,7 +6,12 @@
   "license": "ISC",
   "main": "controllers/authController.js",
   "scripts": {
-    "test": "node integration/testRunner.js"
+    "test": "node integration/testRunner.js",
+    "test:unit": "node --test tests/unit.test.js",
+    "test:team": "node --test tests/teamModulesUnit.test.js",
+    "test:system": "node --test tests/system.test.js",
+    "test:coverage": "node --test --experimental-test-coverage tests/unit.test.js tests/system.test.js",
+    "test:all-coverage": "node --test --experimental-test-coverage tests/unit.test.js tests/teamModulesUnit.test.js tests/system.test.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
